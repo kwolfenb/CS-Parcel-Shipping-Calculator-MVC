@@ -1,0 +1,28 @@
+@using Parcel.Models;
+@{
+  int totalCost = 0; 
+}
+
+<h1>Parcels List</h1>
+@foreach(ParcelInput parcel in Model)
+{
+
+  if(@parcel.GetCostToShip() < 3) 
+  {
+    totalCost += 3;
+    <p>Volume: @parcel.GetVolume()</p>
+    <p>Price: $3.00</p>
+  }
+  else
+  {
+    totalCost += @parcel.GetCostToShip();
+    <p>Volume: @parcel.GetVolume()</p>
+    <p>Price: $ @parcel.GetCostToShip()</p>
+  }
+
+}
+  <h5>
+    Total Cost: $ @totalCost
+  </h5>
+
+<a href="/parcels/new">Add a new Parcel.</a>
